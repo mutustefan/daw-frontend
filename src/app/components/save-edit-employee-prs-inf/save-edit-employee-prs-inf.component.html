@@ -1,0 +1,336 @@
+<form [formGroup]="employeePersInfForm">
+  <div class="form-group">
+    <label for="id">ID</label>
+    <input
+      type="text"
+      name="id"
+      class="form-control"
+      id="id"
+      placeholder="ID"
+      formControlName="id"
+    />
+    <span
+      *ngIf="
+        employeePersInfForm.get('id').invalid &&
+        employeePersInfForm.get('id').touched
+      "
+      class="help-block validation-errors"
+      >Please enter valid ID!</span
+    >
+  </div>
+
+  <div class="form-group">
+    <label for="birthDate">Birth Date</label>
+    <input
+      type="date"
+      name="id"
+      class="form-control"
+      id="birthDate"
+      formControlName="birthDate"
+      data-bs-toggle="tooltip"
+      data-bs-placement="top"
+      title="Select a date in the past"
+    />
+    <span
+      *ngIf="
+        employeePersInfForm.get('birthDate').invalid &&
+        employeePersInfForm.get('birthDate').touched
+      "
+      class="help-block validation-errors"
+      >Please enter the birth date!</span
+    >
+  </div>
+
+  <label for="SexGroupe">Select your gender:</label>
+  <div class="form-group" id="SexGroupe">
+    <input
+      type="radio"
+      name="sex"
+      id="sex1"
+      formControlName="sex"
+      value="m"
+      data-bs-toggle="tooltip"
+      data-bs-placement="top"
+      title="Select your gender"
+    />
+    <label for="sex1">Male</label>
+    <br />
+    <input
+      type="radio"
+      name="sex"
+      id="sex2"
+      formControlName="sex"
+      value="f"
+      data-bs-toggle="tooltip"
+      data-bs-placement="top"
+      title="Select your gender"
+    />
+    <label for="sex2">Female</label>
+
+    <!-- <span *ngIf="employeePersInfForm.get('sex').invalid && employeePersInfForm.get('sex').touched"
+        class="help-block validation-errors">Please select your gender!</span> -->
+  </div>
+
+  <div class="form-group">
+    <label for="country">Country</label>
+    <input
+      type="text"
+      name="country"
+      class="form-control"
+      id="country"
+      placeholder="Country"
+      formControlName="country"
+      data-bs-toggle="tooltip"
+      data-bs-placement="top"
+      title="Enter country name"
+    />
+    <span
+      *ngIf="
+        employeePersInfForm.get('country').invalid &&
+        employeePersInfForm.get('country').touched
+      "
+      class="help-block validation-errors"
+      >Please enter valid country name!</span
+    >
+  </div>
+  <label for="address">Address</label>
+  <button
+    (click)="openAddressModal()"
+    name="address"
+    class="btn btn-primary"
+    formControlName="country"
+    data-bs-toggle="tooltip"
+    data-bs-placement="top"
+    title="Enter address district/city/street/apartment"
+  >
+    Address
+  </button>
+  <!-- <div class="form-group">
+ 
+    <input
+      type="text"
+      name="address"
+      class="form-control"
+      id="address"
+      placeholder="Address"
+      formControlName="address"
+    />
+    <span
+      *ngIf="
+        employeePersInfForm.get('address').invalid &&
+        employeePersInfForm.get('address').touched
+      "
+      class="help-block validation-errors"
+      >Please enter valid address!</span
+    >
+  </div> -->
+
+  <div class="form-group">
+    <label for="familyStatus">Family Status</label>
+    <select
+      id="familyStatus"
+      name="familyStatus"
+      class="form-control"
+      formControlName="familyStatus"
+      data-bs-toggle="tooltip"
+      data-bs-placement="top"
+      title="Select your family status"
+    >
+      <option value="married">Married</option>
+      <option value="single">Single</option>
+    </select>
+    <span
+      *ngIf="
+        employeePersInfForm.get('familyStatus').invalid &&
+        employeePersInfForm.get('familyStatus').touched
+      "
+      class="help-block validation-errors"
+      >Please select your family status!</span
+    >
+  </div>
+
+  <div class="form-group">
+    <label for="englishLevel">English Level</label>
+    <div class="input-box">
+      <input
+        type="range"
+        min="1"
+        max="5"
+        value="1"
+        name="englishLevel"
+        class="form-control"
+        id="englishLevel"
+        formControlName="englishLevel"
+        list="steplist"
+        data-bs-toggle="tooltip"
+        data-bs-placement="top"
+        title="Select english level A1 - C"
+      />
+      <h5 class="english-level">
+        {{
+          englishLevels[this.employeePersInfForm.get("englishLevel").value - 1]
+        }}
+      </h5>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="englishLevel">Salary range</label>
+    <ngx-slider
+      [(value)]="minSalaryValue"
+      [(highValue)]="maxSalaryValue"
+      [options]="options"
+      formControlName="salaryRange"
+      data-bs-toggle="tooltip"
+      data-bs-placement="top"
+      title="Select your salary range"
+    ></ngx-slider>
+  </div>
+
+  <div class="form-group">
+    <label>Programing languages</label>
+    <div
+      class="form-check"
+      data-bs-toggle="tooltip"
+      data-bs-placement="top"
+      title="Select programing languages"
+    >
+      <input
+        class="form-check-input"
+        type="checkbox"
+        value="Java"
+        id="Java"
+        checked="false"
+        formControlName="language_1"
+      />
+      <label class="form-check-label" for="Java"> Java </label>
+    </div>
+    <div class="form-check">
+      <input
+        class="form-check-input"
+        type="checkbox"
+        value="JavaScrypt"
+        id="JavaScrypt"
+        formControlName="language_2"
+      />
+      <label class="form-check-label" for="JavaScrypt"> JavaScript </label>
+    </div>
+    <div class="form-check">
+      <input
+        class="form-check-input"
+        type="checkbox"
+        value="TypeScrypt"
+        id="TypeScrypt"
+        formControlName="language_3"
+      />
+      <label class="form-check-label" for="flexCheckDefault">
+        TypeScript
+      </label>
+    </div>
+  </div>
+  <hr />
+  <div>
+    <button class="btn btn-primary" (click)="update()">Update</button>
+    <button class="btn btn-primary" (click)="backToEmployee()">
+      Back to Employee
+    </button>
+    <button class="btn btn-primary" (click)="goToHomePage()">Home Page</button>
+  </div>
+</form>
+
+<div
+  class="modal succesfulModal"
+  tabindex="-1"
+  role="dialog"
+  [ngStyle]="{ display: succesfulModal ? 'block' : 'none' }"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Employee information updated successfully.</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+          (click)="closeSuccesfullyModal()"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <!-- <div class="modal-body">
+        <p>OK</p>
+      </div> -->
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal addressModal"
+  tabindex="-1"
+  role="dialog"
+  [ngStyle]="{ display: addressModal ? 'block' : 'none' }"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Address</h5>
+      </div>
+      <form>
+        <div class="formGroup">
+          <label class="col-form-label" for="district">District:</label>
+          <input
+            class="form-control"
+            type="text"
+            name="district"
+            id="district"
+            [(ngModel)]="addressArray[0]"
+          />
+        </div>
+
+        <div class="formGroup">
+          <label class="col-form-label" for="city">City:</label>
+          <input
+            class="form-control"
+            type="text"
+            name="city"
+            id="city"
+            [(ngModel)]="addressArray[1]"
+          />
+        </div>
+
+        <div class="formGroup">
+          <label class="col-form-label" for="street">Street:</label>
+          <input
+            class="form-control"
+            type="text"
+            name="street"
+            id="street"
+            [(ngModel)]="addressArray[2]"
+          />
+        </div>
+
+        <div class="formGroup">
+          <label class="col-form-label" for="apartment">Apartment:</label>
+          <input
+            class="form-control"
+            type="text"
+            name="apartment"
+            id="apartment"
+            [(ngModel)]="addressArray[3]"
+          />
+        </div>
+      </form>
+      <button class="btn btn-primary" (click)="saveAddress()">OK</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  var tooltipTriggerList = [].slice.call(
+    document.querySelectorAll('[data-bs-toggle="tooltip"]')
+  );
+  var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+    return new bootstrap.Tooltip(tooltipTriggerEl);
+  });
+</script>

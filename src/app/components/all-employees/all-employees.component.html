@@ -1,0 +1,106 @@
+<div class="container spinner-container">
+  <mat-spinner *ngIf="spinner" class="spinner"></mat-spinner>
+</div>
+<div class="container" id="main-container" *ngIf="!spinner">
+  <h3>Number of employee: {{ nrOfEmployee }}</h3>
+  <div class="row">
+    <div *ngFor="let employee of employees" class="col-md-6 col-xl-3">
+      <div class="card m-b-100">
+        <div class="card-body row">
+          <div class="col-8">
+            <a href=""
+              ><img
+                [src]="employee.imageURL"
+                alt=""
+                class="img-fluid rounded-circle w-60"
+            /></a>
+          </div>
+          <div class="col-15card-title align-self-center mb-0">
+            <h5>{{ employee.name }}</h5>
+            <p class="m-0">{{ employee?.jobTitle }}</p>
+          </div>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item" style="height: 5rem">
+            <i class="fa fa-envelope float-right"></i>Email :
+            <a href="#">{{ employee?.email }}</a>
+          </li>
+          <li class="list-group-item">
+            <i class="fa fa-phone float-right"></i>Phone : {{ employee?.phone }}
+          </li>
+        </ul>
+        <div class="card-body">
+          <div class="float-right btn-group btn-group-sm">
+            <a
+              [routerLink]="['employee', employee.id]"
+              class="btn btn-primary tooltips"
+              data-placement="top"
+              data-toggle="tooltip"
+              data-original-title="Edit"
+              ><i class="fa fa-pencil"></i>Edit</a
+            >
+            <a
+              (click)="deleteEmployee(employee.id)"
+              class="btn btn-secondary tooltips"
+              data-placement="top"
+              data-toggle="tooltip"
+              data-original-title="Delete"
+              ><i class="fa fa-times"></i>Delete</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pagination-buttons">
+      <button
+        class="btn btn-primary btn-change-page"
+        (click)="goToPreviousPage()"
+      >
+        prev
+      </button>
+      <button class="btn btn-primary btn-change-page" (click)="goToNextPage()">
+        next
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- warning modal -->
+<div
+  class="modal warningModal"
+  tabindex="-1"
+  role="dialog"
+  [ngStyle]="{ display: warningModal ? 'block' : 'none' }"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Warning</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+          (click)="closeWarningModal()"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Do you want to delete employee with id {{ idForDelete }}</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="confirmDelete()">
+          Delete
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          (click)="closeDeleteModal()"
+        >
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

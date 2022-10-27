@@ -1,0 +1,234 @@
+<form [formGroup]="employeeForm">
+  <div class="form-group">
+    <label for="id">ID</label>
+    <input
+      type="text"
+      name="id"
+      class="form-control"
+      id="id"
+      placeholder="ID"
+      formControlName="id"
+    />
+    <span
+      *ngIf="!employeeForm.get('id').valid && employeeForm.get('id').touched"
+      class="help-block validation-errors"
+      >Please enter valid ID!</span
+    >
+  </div>
+
+  <div class="form-group">
+    <label for="name">Name</label>
+    <input
+      type="text"
+      name="name"
+      class="form-control"
+      id="name"
+      placeholder="Name"
+      formControlName="name"
+      data-bs-toggle="tooltip"
+      data-bs-placement="top"
+      title="Name length should be between 3 and 20"
+    />
+    <span
+      *ngIf="
+        !employeeForm.get('name').valid && employeeForm.get('name').touched
+      "
+      class="help-block validation-errors"
+      >Please enter valid name!</span
+    >
+  </div>
+
+  <div class="form-group">
+    <label for="email">Email Address</label>
+    <input
+      type="email"
+      name="email"
+      class="form-control"
+      id="email"
+      placeholder="Email"
+      formControlName="email"
+      data-bs-toggle="tooltip"
+      data-bs-placement="top"
+      title="Enter an valid email."
+    />
+    <span
+      *ngIf="
+        !employeeForm.get('email').valid && employeeForm.get('email').touched
+      "
+      class="help-block validation-errors"
+      >Please enter valid email!</span
+    >
+  </div>
+
+  <div class="form-group">
+    <label for="jobTitle">Job title</label>
+    <input
+      type="text"
+      name="jobTitle"
+      class="form-control"
+      id="jobTitle"
+      placeholder="Job title"
+      formControlName="jobTitle"
+      data-bs-toggle="tooltip"
+      data-bs-placement="top"
+      title="Job title should not be blank"
+    />
+    <span
+      *ngIf="
+        !employeeForm.get('jobTitle').valid &&
+        employeeForm.get('jobTitle').touched
+      "
+      class="help-block validation-errors"
+      >Please enter valid job title!</span
+    >
+  </div>
+
+  <div class="form-group">
+    <label for="phone">Phone</label>
+    <input
+      type="text"
+      name="phone"
+      class="form-control"
+      id="phone"
+      name="phone"
+      placeholder="Phone"
+      formControlName="phone"
+      data-bs-toggle="tooltip"
+      data-bs-placement="top"
+      title="Phone should not be blank"
+    />
+    <span
+      *ngIf="
+        !employeeForm.get('phone').valid && employeeForm.get('phone').touched
+      "
+      class="help-block validation-errors"
+      >Please enter valid phone number!</span
+    >
+  </div>
+  <div class="form-group">
+    <label for="imageUrl">Image URL</label>
+    <input
+      type="text"
+      name="imageUrl"
+      class="form-control"
+      id="imageUrl"
+      placeholder="Image URL"
+      formControlName="imageURL"
+      data-bs-toggle="tooltip"
+      data-bs-placement="top"
+      title="Enter URL for your image"
+    />
+    <span
+      *ngIf="
+        !employeeForm.get('imageURL').valid &&
+        employeeForm.get('imageURL').touched
+      "
+      class="help-block validation-errors"
+      >Please enter valid URL!</span
+    >
+  </div>
+  <hr />
+  <div>
+    <button
+      class="btn btn-primary"
+      (click)="save()"
+      [disabled]="employeeForm.invalid"
+      [ngStyle]="{ display: id > 0 ? 'none' : 'inline-block' }"
+    >
+      Save
+    </button>
+    <button
+      class="btn btn-primary"
+      (click)="update()"
+      [disabled]="employeeForm.invalid"
+      [ngStyle]="{ display: id > 0 ? 'inline-block' : 'none' }"
+    >
+      Update
+    </button>
+    <button class="btn btn-primary" (click)="backToEmployeeList()">
+      Back to Employees List
+    </button>
+    <button
+      class="btn btn-primary"
+      (click)="goToEmployeePersInf()"
+      [ngStyle]="{ display: id > 0 ? 'inline-block' : 'none' }"
+    >
+      Personal information
+    </button>
+  </div>
+</form>
+
+<!-- succes modal -->
+
+<div
+  class="modal succesfulModal"
+  tabindex="-1"
+  role="dialog"
+  [ngStyle]="{ display: succesfulModal ? 'block' : 'none' }"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Employee added successfully.</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+          (click)="closeSuccesfullyModal()"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <!-- <div class="modal-body">
+        <p>OK</p>
+      </div> -->
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal errorModal"
+  tabindex="-1"
+  role="dialog"
+  [ngStyle]="{ display: errorModal ? 'block' : 'none' }"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">ERROR</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+          (click)="closeErrorModal()"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>{{ errorMessage }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<button
+  type="button"
+  class="btn btn-secondary"
+  data-bs-toggle="tooltip"
+  data-bs-placement="top"
+  title="Tooltip on top"
+>
+  Tooltip on top
+</button>
+
+<script>
+  var tooltipTriggerList = [].slice.call(
+    document.querySelectorAll('[data-bs-toggle="tooltip"]')
+  );
+  var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+    return new bootstrap.Tooltip(tooltipTriggerEl);
+  });
+</script>

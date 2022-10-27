@@ -1,0 +1,30 @@
+table{
+    text-align: center;
+}
+
+.warningModal{
+    color: orange;
+}
+
+
+.paginationButtons{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.change-page-btn{
+    margin-left: 15px;
+}
+
+.nr-of-records-container{
+    display: flex;
+    flex-direction: row;
+}
+
+.nr-of-records-select{
+    width: 80px;
+    margin-left: 20px;
+}

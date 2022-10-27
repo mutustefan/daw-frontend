@@ -1,0 +1,25 @@
+*{
+    margin: 5px 0;
+}
+.modal-footer{
+    display: flex;
+    justify-content: center;
+}
+
+button {
+    margin-left: 3% ;
+}
+
+.disable-button{
+    display: none;
+}
+
+.succesfulModal{
+    color: green;
+    margin-left: 30%;
+}
+
+.errorModal{
+    color: red;
+    margin-left: 30%;
+}

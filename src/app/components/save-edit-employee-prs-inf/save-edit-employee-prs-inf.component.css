@@ -1,0 +1,42 @@
+button {
+    margin-left: 3% ;
+}
+
+*{
+    margin: 5px 0;
+}
+
+.input-box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+p{
+    margin-left: 15px;
+}
+
+.succesfulModal{
+    color: green;
+    margin-left: 30%;
+}
+
+.english-level{
+    margin-left: 10px;
+}
+
+.addressModal{
+    /* display: block; */
+    margin-left: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.addressModal input{
+    width: 90%;
+    margin-left: 15px;
+}
+
+.addressModal label{
+    margin-left: 10px;
+}

@@ -1,0 +1,39 @@
+.new-employee-btn{
+    margin-bottom: 5%;
+   
+    
+}
+
+.card{
+    margin-bottom: 5%;
+    box-shadow: 3px 3px 12px #0151ac;
+
+}
+
+.btn-change-page{
+    width: 10%;
+   margin-right: 10px;
+}
+
+.pagination-buttons{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.warningModal{
+    color: orange;
+}
+
+.spinner-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.spinner{
+    margin-top: 100px;
+    margin-bottom: 100px;
+}
